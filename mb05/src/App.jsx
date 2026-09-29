@@ -9,6 +9,8 @@ import photos from './data/photos.json'
 import './App.css'
 
 function App() {
+  const [zdjecia, setZdjecia] = useState(photos)
+  
   return (
     <>
       <Navbar />
