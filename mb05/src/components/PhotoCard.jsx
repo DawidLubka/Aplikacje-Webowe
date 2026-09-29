@@ -13,14 +13,23 @@ function PhotoCard({ id, title, description, category, image, alt }) {
           </span>
         </p>
         <p className="card-text text-body-secondary">{description}</p>
+        <div className="d-flex gap-2 mt-auto">
         <button
           type="button"
-          className="btn btn-outline-primary mt-auto"
+          className="btn btn-outline-primary flex-fill"
           data-bs-toggle="modal"
           data-bs-target={`#zdjecie${id}`}
         >
           Powiększ
         </button>
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={onUsun}
+        >
+          Usuń
+        </button>
+      </div>
       </div>
     </div>
   )
