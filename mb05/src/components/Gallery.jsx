@@ -5,13 +5,10 @@ import PhotoModal from './PhotoModal.jsx'
 function Gallery({ zdjecia, onUsun }) {
   return (
     <div id="galeria" className="row g-4">
-      {zdjecia.map((zdjecie) => (
+      {zdjecia.map(zdjecie => (
         <Fragment key={zdjecie.id}>
           <div className="col-12 col-md-6 col-lg-4">
-            <PhotoCard
-              {...zdjecie}
-              onUsun={() => onUsun(zdjecie.id)}
-            />
+            <PhotoCard {...zdjecie} onUsun={() => onUsun(zdjecie.id)} />
           </div>
           <PhotoModal {...zdjecie} />
         </Fragment>

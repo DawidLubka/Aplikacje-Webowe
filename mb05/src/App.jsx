@@ -9,8 +9,9 @@ import photos from './data/photos.json'
 import './App.css'
 
 function usunZdjecie(id) {
-  setZdjecia(zdjecia.filter(z => z.id !== id))
+setZdjecia(zdjecia.filter(z => z.id !== id))
 }
+
 
 
 function App() {
