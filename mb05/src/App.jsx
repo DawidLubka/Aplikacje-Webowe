@@ -18,6 +18,12 @@ function dodajZdjecie(nowe) {
   }])
 }
 
+function przelaczUlubione(id) {
+  setZdjecia(
+    zdjecia.map(z => (z.id === id ? { ...z, favorite: !z.favorite } : z))
+  )
+}
+
 
 
 function App() {
@@ -82,7 +88,11 @@ function App() {
         Nie znaleziono zdjęć w tej kategorii.
         </div>
       )}
-      <Gallery zdjecia={widoczne} onUsun={usunZdjecie} />
+      <Gallery
+        zdjecia={widoczne}
+        onUsun={usunZdjecie}
+        onPrzelacz={przelaczUlubione}
+      />
       </main>
 
       <Footer />
