@@ -9,7 +9,13 @@ import photos from './data/photos.json'
 import './App.css'
 
 function usunZdjecie(id) {
-setZdjecia(zdjecia.filter(z => z.id !== id))
+  setZdjecia(zdjecia.filter(z => z.id !== id))
+}
+
+function dodajZdjecie(nowe) {
+  const noweId = Math.max(...zdjecia.map(z => z.id)) + 1
+  setZdjecia([...zdjecia, { ...nowe, id: noweId, favorite: false
+  }])
 }
 
 
@@ -73,8 +79,7 @@ function App() {
 
       <Footer />
 
-      <AddPhotoModal />
-      <AddPhotoModal />
+      <AddPhotoModal onDodaj={dodajZdjecie} />
       <FiltersOffcanvas aktywna={aktywnaKategoria}
       onWybierz={setAktywnaKategoria} />
     </>
