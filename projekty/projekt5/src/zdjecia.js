@@ -10,5 +10,5 @@ export const zdjeciaStartowe =[
     {id: 8, alt:"Świnka morska", filename: "obraz9.jpg", category:2, downloads: 123},
     {id: 9, alt:"Foksterier", filename: "obraz10.jpg", category:2, downloads: 22},
     {id: 10, alt:"Szczeniak", filename: "obraz11.jpg", category:2, downloads: 12},
-    {id: 11, alt:"Garbus", filename: "obraz12.jpg", category:3, downloads: 321}
+    // {id: 11, alt:"Garbus", filename: "obraz12.jpg", category:3, downloads: 321}
 ]
