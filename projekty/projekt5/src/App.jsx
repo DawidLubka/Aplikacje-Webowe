@@ -3,12 +3,15 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { zdjeciaStartowe } from "./zdjecia";
 
+
+const NAZWY_KATEGORII = { 1: 'Kwiaty', 2: 'Zwierzęta', 3: 'Samochody' };
+const KATEGORIE = [1, 2, 3];
+
+
 function App() {
   const [zdjecia, setZdjecia] = useState(zdjeciaStartowe);
 
-  const [kwiaty, setKwiaty] = useState(true);
-  const [zwierzeta, setzwierzeta] = useState(true);
-  const [samochody, setSamochody] = useState(true);
+  const [aktywneKategorie, setAktywneKategorie] = useState(KATEGORIE);
 
   const altRef = useRef(null)
   const filenameRef = useRef(null)
@@ -34,6 +37,14 @@ function App() {
     event.target.reset();
   }
 
+  function przelaczKategorie(kategoria) {
+    setAktywneKategorie(aktywne =>
+      aktywne.includes(kategoria)
+        ? aktywne.filter(k => k != kategoria)
+        : [...aktywne, kategoria]
+    );
+  }
+
   const zwiekszPobrania = (id) => {
     const zakutalizowaneZdjecie = zdjecia.map((z) => {
       if (z.id == id) {
@@ -49,44 +60,19 @@ function App() {
       <h1>Kategorie Zdjęć</h1>
       {/* kategorie (switch) */}
       <form className="d-flex gap-3">
-        <div className="form-check form-switch">
+      
+        {KATEGORIE.map(kategoria => (<div className="form-check form-switch" key={kategoria}>
           <input
           className="form-check-input"
           type="checkbox"
-          id="chbKwiaty"
-          onChange={()=>{setKwiaty(!kwiaty)}}
-          checked={kwiaty}
+          id={`kategoria-${kategoria}`}
+          checked={aktywneKategorie.includes(kategoria)}
+          onChange={() =>  przelaczKategorie(kategoria)}
           />
-          <label className="form-check-label" htmlFor="chbKwiaty">
-            Kwiaty
+          <label className="form-check-label" htmlFor={`kategoria-${kategoria}`}>
+            {NAZWY_KATEGORII[kategoria]}
           </label>
-        </div>
-
-        <div className="form-check form-switch">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="chbZwierzeta"
-            onChange={()=>{setzwierzeta(!zwierzeta)}}
-            checked={zwierzeta}
-          />
-          <label className="form-check-label" htmlFor="chbZwierzeta">
-            Zwierzęta
-          </label>
-        </div>
-
-        <div className="form-check form-switch">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            id="chbSamochody"
-            onChange={()=>{setSamochody(!samochody)}}
-            checked={samochody}
-          />
-          <label className="form-check-label" htmlFor="chbSamochody">
-            Samochody
-          </label>
-        </div>
+        </div>))}
       </form>
 
       <hr></hr>
@@ -122,10 +108,7 @@ function App() {
       <div className="container">
         <div className="row">
           {zdjecia.filter((z) =>{
-            if(z.category == 1 && kwiaty) return true
-            if(z.category == 2 && zwierzeta) return true
-            if(z.category == 3 && samochody) return true
-            return
+            return aktywneKategorie.includes(z.category)
           }).map((z) => (
             <div className="col-md-4 mb-4" key={z.id}>
               <img
